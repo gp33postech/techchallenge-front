@@ -1,7 +1,7 @@
 import Button from '../components/button/Button';
 import { React, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Input from '../components/Forms/input';
+import Input from '../components/Forms/Input';
 import Textarea from '../components/Forms/TextArea';
 import ModalConfirmacao from '../components/modalConfirmacao/ModalConfirmacao';
 import { useFetch } from '../hooks/useFetch';
