@@ -6,7 +6,11 @@ import { useNavigate } from 'react-router-dom';
 
 const SectionCard = () => {
     const API_URL = import.meta.env.VITE_API_URL;
-    const [url, setUrl] = useState(`${API_URL}/posts/`);
+
+    // Garante que a URL final fique sem barra dupla, mesmo que a env tenha "/" no final
+    const apiEndpoint = `${API_URL.replace(/\/$/, '')}/posts`;
+
+    const [url, setUrl] = useState(apiEndpoint);
     const [options, setOptions] = useState({ method: 'GET' });
     const { data, error, loading } = useFetch(url, options);
     const navigate = useNavigate();
