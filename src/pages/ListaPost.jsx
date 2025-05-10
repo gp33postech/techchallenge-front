@@ -15,7 +15,6 @@ const ListaPost = () => {
     const [options, setOptions] = useState({ method: 'GET' });
     const { data, error, loading } = useFetch(url,options);
     const [confirmarModal, setConfirmarModal] = useState(false);
-    const  [,setFecharModal] = useState(false);
     const navigate = useNavigate();
    
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,12 +50,11 @@ const ListaPost = () => {
       open={confirmarModal}
       onClose={() => {
        
-        setFecharModal(false);
+      setConfirmarModal(false);
         
       }}
        
       onConfirm={() => {
-        setFecharModal(false);
         setConfirmarModal(false);
         navigate(`/editarpost/${idPost}`);
         console.log('Editar post', idPost);

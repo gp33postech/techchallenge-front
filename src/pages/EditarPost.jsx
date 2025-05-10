@@ -120,14 +120,21 @@ const EditarPost = () => {
           styleTitulo={'text-left text-white'}
           onChange={(e) => setTitulo(e.target.value)}
         />
-        <Input
-          Titulo={'Imagem'}
-          value={imagem}
-          onChange={(e) => setImagem(e.target.value)}
-          placeholder={'URL da Imagem'}
-          tipo={'text'}
-          tamanho={'w-full'}
-          styleTitulo={'text-white'}
+<Input
+  Titulo={'Imagem'}
+  tipo={'file'}
+  tamanho={'w-full'}
+  styleTitulo={'text-white'}
+  onChange={(e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagem(reader.result); // Base64 aqui
+      };
+      reader.readAsDataURL(file);
+    }
+  }}
 />
         <Textarea 
          Titulo={'Texto da Postagem'}

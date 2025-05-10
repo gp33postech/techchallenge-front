@@ -13,6 +13,8 @@ const Detalhes = () => {
     const [imagem, setImagem] = useState('');
     const [conteudo, setConteudo] = useState('');
     const [autor, setAutor] = useState('');
+    const [updatedAt, setUpdateAt] = useState('');
+    
 
     useEffect(() => {
     if(data){
@@ -20,6 +22,8 @@ const Detalhes = () => {
         setImagem(data.image);
         setConteudo(data.description);
         setAutor(data.author);
+        setUpdateAt(data.updatedAt);
+        
     }
     }, [data]);
   return (
@@ -38,7 +42,7 @@ const Detalhes = () => {
                     </p>
 
                     <p className="mt-4 text-sm italic text-gray-600 text-end">
-                        Por <span className="font-semibold text-gray-800 ">{autor}</span>
+                        Por <span className="font-semibold text-gray-800 ">{autor}{updatedAt}</span>
                     </p>
             </div>
 
