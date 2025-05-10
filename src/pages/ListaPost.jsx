@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import InputBusca from '../components/research/inputBusca';
+import InputBusca from '../components/research/InputBusca';
 import { FaPlus } from "react-icons/fa";
 import Button from '../components/button/Button';
 import TabelaPost from '../components/List/TabelaPost';
