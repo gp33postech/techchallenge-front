@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../components/button/Button';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import SectionCard from '../components/card/sectionCard';
+import SectionCard from '../components/card/SectionCard';
 import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
