@@ -1,4 +1,4 @@
-import Header from "./components/header/header"
+import Header from "./components/header/Header"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ListaPost from "./pages/ListaPost"
 import EditarPost from "./pages/EditarPost"
