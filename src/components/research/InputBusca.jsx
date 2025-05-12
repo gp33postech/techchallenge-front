@@ -14,7 +14,7 @@ function InputBusca({value,onChange,text}) {
       <input
       
         onChange={onChange}
-        type="imput"
+        type="input"
         value={value}
         placeholder={text}
         className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-4 focus:ring-blue-600"

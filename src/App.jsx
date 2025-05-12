@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import Detalhes from "./pages/Detalhes";
 import { AuthProvider } from "./context/AuthContext";
 import RotaPrivada from './components/rotaPrivada/RotaPrivada';
+import Login from './pages/Login'
 
 function App() {
   
@@ -14,7 +15,7 @@ function App() {
     <AuthProvider>
 
      <BrowserRouter>
-     <Header nomeUsuario="Pedro" />
+      <Header nomeUsuario="Login" />
      <Routes>
 
      <Route path="/" element={<Navigate to="/home" replace />} />
@@ -23,6 +24,7 @@ function App() {
               { /*Rota para Detalhes */}
               <Route path="/detalhes/:id" element={<Detalhes />} />
               
+              <Route path="/login" element={<Login />} />
     
 
               {  /*Rota para listas de post */}
