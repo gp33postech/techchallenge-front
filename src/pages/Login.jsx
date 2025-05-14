@@ -12,7 +12,16 @@ function Login() {
   
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email == 'filipe@teste.com' && password == '123456') {
+
+    const usuarios = [
+      { id: 1, email: "filipe@teste.com", password: 123456 },
+      { id: 2, email: "adriano@teste.com", password: 123456 },
+      { id: 3, email: "gabriela@teste.com", password: 123456 },
+      { id: 4, email: "pedro@teste.com", password: 123456 }
+    ];
+    
+    const usuarioEncontrado = usuarios.find((usuario) => usuario.email === email); 
+    if (usuarioEncontrado !== undefined) {
       login();  
       navigate("/Home",{ state: { user: email.substring(0, email.indexOf("@")) } }); 
     } else {
