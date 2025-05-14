@@ -17,6 +17,15 @@ const Detalhes = () => {
   const [conteudo, setConteudo] = useState('');
   const [autor, setAutor] = useState('');
   const [updatedAt, setUpdateAt] = useState('');
+  const paragrafos = conteudo.split(/\r?\n/);
+  
+
+
+    const dataArrumada = new Date(updatedAt).toLocaleDateString('pt-BR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
 
   useEffect(() => {
     if (data) {
@@ -25,12 +34,28 @@ const Detalhes = () => {
       setConteudo(data.description);
       setAutor(data.author);
       setUpdateAt(data.updatedAt);
+
     }
   }, [data]);
 
+  
+
   return (
     <>
-      <div className="flex flex-col p-12 bg-slate-300 min-h-[100vh] gap-6 items-center">
+      {loading && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <span className="text-3xl font-semibold text-gray-700 animate-pulse">
+                        Carregando...
+                    </span>
+                </div>
+            )}
+            {error && (
+                <p className="mt-14 text-sm text-red-700 bg-red-100 border border-red-300 rounded px-4 py-2 text-center">
+                    Erro ao carregar os dados
+                </p>
+            )}
+
+{data && (<div className="flex flex-col p-12 bg-slate-300 min-h-[100vh] gap-6 items-center">
         <div className="flex justify-between items-center w-full mt-5">
           <h1 className="text-sm sm:text-3xl font-bold text-gray-700 capitalize">
             {titulo}
@@ -55,17 +80,31 @@ const Detalhes = () => {
             alt={titulo}
             className="w-[50vw] h-[150px] sm:h-[250px] lg:h-[420px] object-cover rounded-lg mt-5"
           />
-          <p className="text-gray-700 text-sm md:text-lg font-semibold mt-5 text-justify w-[70vw] mb-2">
-            {conteudo}
-          </p>
-          <p className="mt-4 text-sm italic text-gray-600 text-end">
+         <div className="text-gray-700 text-sm md:text-lg font-semibold mt-5 w-[70vw]">
+              {paragrafos.map((paragrafo, index) =>
+                paragrafo.trim() !== '' ? (
+                <p
+                  key={index}
+                    className={`text-left leading-snug indent-8 mb-2 last:mb-0`}
+                  >
+                {paragrafo}
+      </p>
+    ) : null
+  )}
+</div>
+          <div className='flex justify-between items-center w-full p-5'>
+          <p className="text-sm italic text-gray-600 text-end">
             Por{' '}
-            <span className="font-semibold text-gray-800">
-              {autor} {updatedAt}
+            <span className=" font-semibold text-gray-800">
+              {autor} 
             </span>
           </p>
+          <p className=' font-semibold text-gray-800 ' > {dataArrumada} </p>
+          </div>
+          
         </div>
-      </div>
+      </div>)}
+      
     </>
   );
 };

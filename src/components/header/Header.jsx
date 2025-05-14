@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Header = ({nomeUsuario}) => {
   
-  const { logado} = useAuth();
+  const {logado,} = useAuth();
   
   const navigate = useNavigate();
 

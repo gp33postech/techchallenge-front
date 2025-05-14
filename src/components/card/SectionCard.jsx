@@ -24,7 +24,11 @@ const SectionCard = () => {
                     </span>
                 </div>
             )}
-            {error && <p>Erro ao carregar os dados: {error.message}</p>}
+            {error && (
+                <p className="mt-14 text-sm text-red-700 bg-red-100 border border-red-300 rounded px-4 py-2 text-center">
+                    Erro ao carregar os dados
+                </p>
+            )}
 
             <section className="mt-10 flex flex-wrap gap-4 justify-center items-center sm:justify-start">
                 {data &&

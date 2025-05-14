@@ -35,8 +35,45 @@ const EditarPost = () => {
       setTitulo(data.title);
       setImagem(data.image);
       setConteudo(data.description);
+      
     }
-  }, [data, id]);
+  }, [API_BASE, data, id, isEdicao]);
+
+
+  const handleConfirm = async () => {
+  if (titulo !== '' && conteudo !== '') {
+    const url = isEdicao
+      ? `${API_BASE}/posts/${id}`
+      : `${API_BASE}/posts`;
+
+    const method = isEdicao ? 'PUT' : 'POST';
+
+    try {
+      await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: titulo,
+          image: imagem,
+          description: conteudo,
+          ...(isEdicao ? {} : { author: 'Pedro Teste' }),
+        }),
+      });
+
+      setModalSalvar(false);
+      navigate('/listaspost');
+    } catch (err) {
+      console.error('Erro ao salvar:', err);
+    }
+  } else {
+    
+    alert('Preencha o título e o conteúdo!');
+  }
+};
+
+
 
   return (
     <>
@@ -62,33 +99,7 @@ const EditarPost = () => {
         texto="Deseja Salvar?"
         open={modalSalvar}
         onClose={() => setModalSalvar(false)}
-        onConfirm={async () => {
-          const url = isEdicao
-            ? `${API_BASE}/posts/${id}`
-            : `${API_BASE}/posts`;
-
-          const method = isEdicao ? 'PUT' : 'POST';
-
-          try {
-            await fetch(url, {
-              method,
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                title: titulo,
-                image: imagem,
-                description: conteudo,
-                ...(isEdicao ? {} : { author: 'Pedro Teste' }),
-              }),
-            });
-
-            setModalSalvar(false);
-            navigate('/listaspost');
-          } catch (err) {
-            console.error('Erro ao salvar:', err);
-          }
-        }}
+        onConfirm={handleConfirm}
       />
 
       <div className="p-12 bg-slate-300 min-h-[100vh] justify-center items-center">
