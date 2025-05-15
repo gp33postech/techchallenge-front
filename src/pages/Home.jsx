@@ -27,11 +27,17 @@ const Home = () => {
     }
   };
 
+  // Busca inicial e ao limpar a pesquisa (sem debounce)
   useEffect(() => {
     if (palavraChave.trim() === '') {
       buscar();
-      return;
     }
+    // eslint-disable-next-line
+  }, [palavraChave === '']);
+
+  // Busca com debounce ao digitar
+  useEffect(() => {
+    if (palavraChave.trim() === '') return;
     const delay = setTimeout(() => {
       buscar();
     }, 300);
