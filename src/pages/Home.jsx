@@ -13,12 +13,10 @@ const Home = () => {
   const API_URL = import.meta.env.VITE_API_URL;
 
   const [palavraChave, setPalavraChave] = useState('');
-  const [dados, setDados] = useState([]);
   const [url, setUrl] = useState(`${API_URL}/posts/`);
   const [options, setOptions] = useState({ method: 'GET' });
   const { data, error, loading } = useFetch(url, options);
 
-  // Função buscar
   const buscar = () => {
     if (palavraChave.trim() !== '') {
       setUrl(`${API_URL}/posts/search?query=${palavraChave}`);
@@ -29,17 +27,11 @@ const Home = () => {
     }
   };
 
-  // Busca inicial e ao limpar a pesquisa (sem debounce)
   useEffect(() => {
     if (palavraChave.trim() === '') {
       buscar();
+      return;
     }
-    // eslint-disable-next-line
-  }, [palavraChave === '']);
-
-  // Busca com debounce ao digitar
-  useEffect(() => {
-    if (palavraChave.trim() === '') return;
     const delay = setTimeout(() => {
       buscar();
     }, 300);
@@ -47,48 +39,39 @@ const Home = () => {
     // eslint-disable-next-line
   }, [palavraChave]);
 
-  // Atualiza os dados quando a API retornar
-  useEffect(() => {
-    if (data) {
-      setDados(Array.isArray(data) ? data : []);
-    }
-  }, [data]);
-
   return (
-    <>
-      <div className="flex flex-col p-12 bg-slate-300 min-h-[100vh]">
-        <div className="flex flex-wrap justify-between items-center w-full mt-5">
-          <h1 className="text-xl sm:text-3xl font-bold text-gray-700">Postagens</h1>
-          <InputBusca
-            value={palavraChave}
-            text="Pesquisar postagens"
-            onChange={(e) => setPalavraChave(e.target.value)}
+    <div className="flex flex-col p-12 bg-slate-300 min-h-[100vh]">
+      <div className="flex flex-wrap justify-between items-center w-full mt-5">
+        <h1 className="text-xl sm:text-3xl font-bold text-gray-700">Postagens</h1>
+        <InputBusca
+          value={palavraChave}
+          text="Pesquisar postagens"
+          onChange={(e) => setPalavraChave(e.target.value)}
+        />
+        {logado && (
+          <Button
+            texto="Painel Admin"
+            icon={UserOutlined}
+            onClick={() => navigate('/listaspost')}
+            className="text-sm"
           />
-          {logado && (
-            <Button
-              texto="Painel Admin"
-              icon={UserOutlined}
-              onClick={() => navigate('/listaspost')}
-              className="text-sm"
-            />
-          )}
-        </div>
-
-        {loading ? (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <span className="text-3xl font-semibold text-gray-700 animate-pulse">
-              Carregando...
-            </span>
-          </div>
-        ) : error ? (
-          <p>Erro ao carregar os dados: {error.message}</p>
-        ) : Array.isArray(dados) && dados.length > 0 ? (
-          <SectionCard data={dados} />
-        ) : (
-          <></>
         )}
       </div>
-    </>
+
+      {loading ? (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <span className="text-3xl font-semibold text-gray-700 animate-pulse">
+            Carregando...
+          </span>
+        </div>
+      ) : error ? (
+        <p>Erro ao carregar os dados: {error.message}</p>
+      ) : Array.isArray(data) && data.length > 0 ? (
+        <SectionCard data={data} />
+      ) : (
+        <p className="text-center mt-8">Nenhum resultado encontrado.</p>
+      )}
+    </div>
   );
 };
 
