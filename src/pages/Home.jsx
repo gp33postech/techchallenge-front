@@ -37,11 +37,7 @@ const Home = () => {
 
   // Busca com debounce ao digitar
   useEffect(() => {
-    if (palavraChave.trim() === '') return;
-    const delay = setTimeout(() => {
-      buscar();
-    }, 300);
-    return () => clearTimeout(delay);
+    buscar();
     // eslint-disable-next-line
   }, [palavraChave]);
 
