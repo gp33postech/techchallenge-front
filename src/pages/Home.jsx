@@ -33,7 +33,7 @@ const Home = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       buscar(); // Chama a função buscar
-    }, 1000); // Atraso de 1 segundo enquanto o usuário digita
+    }, 100); // Atraso enquanto o usuário digita
 
     return () => clearTimeout(delay); // Limpa o timeout anterior
   }, [palavraChave]);
