@@ -34,6 +34,7 @@ const SectionCard = ({ data, carousel }) => {
                                 image={post.image}
                                 conteudo={post.description}
                                 autor={post.author}
+                                updatedAt={post.updatedAt}
                                 onClick={() => navigate(`/detalhes/${post._id}`)}
                             />
                         </div>
