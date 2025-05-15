@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({titulo,image, conteudo, autor, onClick}) => {
+const Card = ({titulo,image, conteudo, autor, updatedAt,onClick}) => {
 
    
 
@@ -12,6 +12,10 @@ const Card = ({titulo,image, conteudo, autor, onClick}) => {
       }
 
       const resumo = resumirTextoBonito(conteudo);
+
+      const dataFormatada = updatedAt
+        ? new Date(updatedAt).toLocaleDateString('pt-BR')
+        : '';
 
   return (
     <>
@@ -33,7 +37,13 @@ const Card = ({titulo,image, conteudo, autor, onClick}) => {
                     <b>Autor: </b>
                     {autor}
                 </p>
-                
+           
+            {updatedAt && (
+                <p className='text-gray-600 font-arial p-3 text-sm'>
+                    Atualizado em: {dataFormatada}
+                </p>
+            )}
+       
                 
             </div>
             
