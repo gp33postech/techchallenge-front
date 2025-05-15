@@ -29,22 +29,25 @@ const Home = () => {
     }
   };
 
-  // useEffect para monitorar mudanças na palavra-chave
-useEffect(() => {
-  // Se for o carregamento inicial (palavraChave vazia), busca sem delay
-  if (palavraChave.trim() === '') {
-    buscar();
-    return;
-  }
-  // Se for busca digitando, usa debounce
-  const delay = setTimeout(() => {
-    buscar();
-  }, 300); // 300ms é um valor confortável
+  // Busca inicial e ao limpar a pesquisa (sem debounce)
+  useEffect(() => {
+    if (palavraChave.trim() === '') {
+      buscar();
+    }
+    // eslint-disable-next-line
+  }, [palavraChave === '']);
 
-  return () => clearTimeout(delay);
-}, [palavraChave]);
+  // Busca com debounce ao digitar
+  useEffect(() => {
+    if (palavraChave.trim() === '') return;
+    const delay = setTimeout(() => {
+      buscar();
+    }, 300);
+    return () => clearTimeout(delay);
+    // eslint-disable-next-line
+  }, [palavraChave]);
 
-  // useEffect para atualizar os dados quando a API retornar
+  // Atualiza os dados quando a API retornar
   useEffect(() => {
     if (data) {
       setDados(Array.isArray(data) ? data : []);
