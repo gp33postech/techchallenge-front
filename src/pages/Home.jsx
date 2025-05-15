@@ -13,7 +13,7 @@ const Home = () => {
   const API_URL = import.meta.env.VITE_API_URL;
 
   const [palavraChave, setPalavraChave] = useState('');
-  const [dados, setDados] = useState([]); // Estado para armazenar os dados retornados
+  const [dados, setDados] = useState([]);
   const [url, setUrl] = useState(`${API_URL}/posts/`);
   const [options, setOptions] = useState({ method: 'GET' });
   const { data, error, loading } = useFetch(url, options);
@@ -30,21 +30,27 @@ const Home = () => {
   };
 
   // useEffect para monitorar mudanças na palavra-chave
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      buscar(); // Chama a função buscar
-    }, 100); // Atraso enquanto o usuário digita
+useEffect(() => {
+  // Se for o carregamento inicial (palavraChave vazia), busca sem delay
+  if (palavraChave.trim() === '') {
+    buscar();
+    return;
+  }
+  // Se for busca digitando, usa debounce
+  const delay = setTimeout(() => {
+    buscar();
+  }, 300); // 300ms é um valor confortável
 
-    return () => clearTimeout(delay); // Limpa o timeout anterior
-  }, [palavraChave]);
+  return () => clearTimeout(delay);
+}, [palavraChave]);
 
   // useEffect para atualizar os dados quando a API retornar
-useEffect(() => {
-  if (data) {
-    console.log('Resposta da API:', data);
-    setDados(Array.isArray(data) ? data : []);
-  }
-}, [data]);
+  useEffect(() => {
+    if (data) {
+      setDados(Array.isArray(data) ? data : []);
+    }
+  }, [data]);
+
   return (
     <>
       <div className="flex flex-col p-12 bg-slate-300 min-h-[100vh]">
@@ -65,18 +71,18 @@ useEffect(() => {
           )}
         </div>
 
-        {loading && (
+        {loading ? (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <span className="text-3xl font-semibold text-gray-700 animate-pulse">
               Carregando...
             </span>
           </div>
-        )}
-
-        {error && <p>Erro ao carregar os dados: {error.message}</p>}
-
-        {dados && (
+        ) : error ? (
+          <p>Erro ao carregar os dados: {error.message}</p>
+        ) : Array.isArray(dados) && dados.length > 0 ? (
           <SectionCard data={dados} />
+        ) : (
+          <></>
         )}
       </div>
     </>
