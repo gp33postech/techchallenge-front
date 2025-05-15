@@ -87,7 +87,9 @@ const ListaPost = () => {
           </div>
         )}
 
-        {error && <p>Erro ao carregar os dados: {error.message}</p>}
+        {error && <p className="mt-14 text-sm text-red-700 bg-red-100 border border-red-300 rounded px-4 py-2 text-center">
+                    Erro ao carregar os dados
+                </p>}
 
         {dadosTabela && (
           <TabelaPost

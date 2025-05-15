@@ -15,7 +15,7 @@ function App() {
     <AuthProvider>
 
      <BrowserRouter>
-      <Header nomeUsuario="Login" />
+      <Header />
      <Routes>
 
      <Route path="/" element={<Navigate to="/home" replace />} />
