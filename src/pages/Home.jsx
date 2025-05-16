@@ -27,39 +27,43 @@ const Home = () => {
     }
   };
 
-  // Busca inicial e ao limpar a pesquisa (sem debounce)
+  // Único useEffect para busca: busca imediata ao abrir/limpar, debounce ao digitar
   useEffect(() => {
     if (palavraChave.trim() === '') {
       buscar();
+      return;
     }
-    // eslint-disable-next-line
-  }, [palavraChave === '']);
-
-  // Busca com debounce ao digitar
-  useEffect(() => {
-    buscar();
+    const delay = setTimeout(() => {
+      buscar();
+    }, 300);
+    return () => clearTimeout(delay);
     // eslint-disable-next-line
   }, [palavraChave]);
 
   return (
-    <div className="flex flex-col p-12 bg-slate-300 min-h-[100vh]">
-      <div className="flex flex-wrap justify-between items-center w-full mt-5">
-        <h1 className="text-xl sm:text-3xl font-bold text-gray-700">Postagens</h1>
-        <InputBusca
-          value={palavraChave}
-          text="Pesquisar postagens"
-          onChange={(e) => setPalavraChave(e.target.value)}
-        />
-        {logado && (
+  <div className="bg-slate-300 min-h-[100vh]">
+    <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4">
+      <h1 className="text-2xl sm:text-4xl font-bold text-gray-700 mt-7">Postagens</h1>
+      {logado && (
+        <div className="self-start sm:self-auto">
           <Button
             texto="Painel Admin"
             icon={UserOutlined}
             onClick={() => navigate('/listaspost')}
-            className="text-sm"
+            className="text-base"
           />
-        )}
-      </div>
-
+        </div>
+      )}
+    </div>
+    <div className="flex flex-col items-center mt-8 mb-6">
+      <InputBusca
+        value={palavraChave}
+        text="Pesquisar postagens"
+        onChange={(e) => setPalavraChave(e.target.value)}
+        className="w-full max-w-xl"
+      />
+    </div>
+    <div className="mt-8">
       {loading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <span className="text-3xl font-semibold text-gray-700 animate-pulse">
@@ -71,12 +75,12 @@ const Home = () => {
                     Erro ao carregar os dados
                 </p>
       ) : Array.isArray(data) && data.length > 0 ? (
-        <SectionCard data={data} />
+        <SectionCard data={data} carousel />
       ) : (
         <p className="text-center mt-8">Nenhum resultado encontrado.</p>
       )}
     </div>
-  );
-};
+  </div>
+);}
 
 export default Home;
