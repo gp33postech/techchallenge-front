@@ -19,13 +19,13 @@ const Card = ({ titulo, image, conteudo, autor, updatedAt, onClick, fullWidth })
   return (
     <>
       <div
-        className={
-          fullWidth
-            ? 'flex flex-col w-full min-h-[340px] h-[380px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-lg hover:bg-gray-100 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-transform duration-300 ease-in-out'
-            : 'flex flex-col w-full sm:max-w-[300px] md:max-w-[350px] lg:max-w-[430px] min-h-[340px] h-[380px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-lg hover:bg-gray-100 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-transform duration-300 ease-in-out'
-        }
-        onClick={onClick}
-      >
+  className={
+    fullWidth
+      ? 'flex flex-col w-full md:w-4/5 mx-auto min-h-[340px] h-[380px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-lg hover:bg-gray-100 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-transform duration-300 ease-in-out'
+      : 'flex flex-col w-full sm:max-w-[300px] md:max-w-[350px] lg:max-w-[430px] min-h-[340px] h-[380px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] rounded-lg hover:bg-gray-100 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:-translate-y-2 transition-transform duration-300 ease-in-out'
+  }
+  onClick={onClick}
+>
         <img
           className='w-full h-40 object-cover rounded-t-lg'
           src={image ? image : "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d"}
