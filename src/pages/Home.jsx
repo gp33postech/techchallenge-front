@@ -20,12 +20,12 @@ const Home = () => {
   const isMobile = useIsMobile();
 
   // Estado para alternar visualização
-  const [visualizacaoCarrossel, setVisualizacaoCarrossel] = useState(false);
-
+  const [visualizacaoCarrossel, setVisualizacaoCarrossel] = useState(!isMobile);
   // Sempre começa como lista no mobile
   useEffect(() => {
-    if (isMobile) setVisualizacaoCarrossel(false);
-  }, [isMobile]);
+  if (isMobile) setVisualizacaoCarrossel(false);
+  else setVisualizacaoCarrossel(true);
+}, [isMobile]);
 
   const buscar = () => {
     if (palavraChave.trim() !== '') {
