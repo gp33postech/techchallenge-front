@@ -12,7 +12,7 @@ const SectionCard = ({ data, carousel }) => {
     const sliderRef = useRef(null);
 
     const [pagina, setPagina] = useState(0);
-    const cardsPorPagina = 3;
+    const cardsPorPagina = 10;
     const totalPaginas = Math.ceil(data.length / cardsPorPagina);
 
     const handlePrev = () => {
@@ -56,13 +56,14 @@ const SectionCard = ({ data, carousel }) => {
                                 image={post.image}
                                 conteudo={post.description}
                                 autor={post.author}
+                                updatedAt={post.updatedAt}
                                 onClick={() => navigate(`/detalhes/${post._id}`)}
                             />
                         </div>
                     ))}
                 </Slider>
                 {/* Botões para navegação do carrossel */}
-                <div className="flex justify-center gap-4 mt-4">
+                <div className="flex justify-center gap-4 mt-10">
                     <button
                         onClick={handlePrev}
                         className="px-4 py-2 bg-gray-500 text-white rounded disabled:opacity-50"
@@ -95,7 +96,9 @@ const SectionCard = ({ data, carousel }) => {
                         image={post.image}
                         conteudo={post.description}
                         autor={post.author}
+                        updatedAt={post.updatedAt}
                         onClick={() => navigate(`/detalhes/${post._id}`)}
+                        fullWidth={!carousel}
                     />
                 ))}
             </section>
