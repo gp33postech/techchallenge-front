@@ -5,11 +5,13 @@ import Input from '../components/Forms/Input';
 import Textarea from '../components/Forms/TextArea';
 import ModalConfirmacao from '../components/modalConfirmacao/ModalConfirmacao';
 import { useFetch } from '../hooks/useFetch';
+import { useAuth } from '../context/AuthContext';
 
 const EditarPost = () => {
   const { id } = useParams();
   const [url, setUrl] = useState(null);
   const [options, setOptions] = useState(null);
+  const { nomeUsuario} = useAuth();
 
   const { data, error, loading } = useFetch(url, options);
 
@@ -58,7 +60,7 @@ const EditarPost = () => {
           title: titulo,
           image: imagem,
           description: conteudo,
-          ...(isEdicao ? {} : { author: 'Pedro Teste' }),
+          ...(isEdicao ? {} : { author: nomeUsuario }),
         }),
       });
 

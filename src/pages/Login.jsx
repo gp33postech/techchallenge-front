@@ -8,7 +8,7 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { login, setNomeUsuario} = useAuth();
   
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,6 +22,7 @@ function Login() {
     
     const usuarioEncontrado = usuarios.find((usuario) => usuario.email === email); 
     if (usuarioEncontrado !== undefined) {
+      setNomeUsuario(email.substring(0, email.indexOf("@")));
       login();  
       navigate("/Home",{ state: { user: email.substring(0, email.indexOf("@")) } }); 
     } else {
