@@ -24,13 +24,13 @@ const Header = () => {
   }
   
   return (
-    <div className='flex justify-between items-center bg-gray-800 text-white p-4 '>
+    <div className='flex justify-between items-center bg-gray-800 text-white p-4 capitalize '>
         <p className='pl-10 text-xl font-bold' onClick={goToHome}>Blog Tech</p>
         
         
         {nomeUsuario ? (
           <a onClick={handleLogin}
-          className='flex gap-2 justify-center items-center ali mr-10 pr-2 rounded hover:bg-gray-700 capitalize' href="#"> 
+          className='flex gap-2 justify-center items-center ali mr-10 pr-2 rounded hover:bg-gray-700' href="#"> 
           <RiUserFollowLine size={20} /> {nomeUsuario}
         </a>
 

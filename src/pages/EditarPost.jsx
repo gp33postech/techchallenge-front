@@ -60,6 +60,7 @@ const EditarPost = () => {
           title: titulo,
           image: imagem,
           description: conteudo,
+          updatedAt: new Date().toISOString(),
           ...(isEdicao ? {} : { author: nomeUsuario }),
         }),
       });

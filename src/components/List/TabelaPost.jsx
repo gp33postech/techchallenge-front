@@ -62,7 +62,7 @@ const TabelaPost = ({dadosList,idClicado, isModalOpen }) => {
   return (
     <>
    
-    <div className='w-full overflow-x-auto bg-white rounded shadow'>
+    <div className='w-full overflow-x-auto bg-white rounded shadow capitalize'>
       <Table
         columns={columns}
         

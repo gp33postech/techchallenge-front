@@ -43,7 +43,7 @@ const Card = ({ titulo, image, conteudo, autor, updatedAt, onClick, fullWidth })
 
         <div className="flex-grow"></div>
         <p className="flex items-center justify-between text-gray-600 font-arial p-3 text-sm ">
-          <span><b>Autor: </b>{autor}</span>
+          <span className="capitalize"><b>Autor: </b>{autor}</span>
           <span>
             Atualizado em: {dataArrumada}
           </span>
