@@ -30,7 +30,7 @@ const Header = () => {
         
         {nomeUsuario ? (
           <a onClick={handleLogin}
-          className='flex gap-2 justify-center items-center ali mr-10 pr-2 rounded hover:bg-gray-700' href="#"> 
+          className='flex gap-2 justify-center items-center ali mr-10 pr-2 rounded hover:bg-gray-700 capitalize' href="#"> 
           <RiUserFollowLine size={20} /> {nomeUsuario}
         </a>
 
