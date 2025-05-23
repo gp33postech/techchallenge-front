@@ -22,5 +22,5 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker build -t $DOCKER_USERNAME/frontend:latest .
-          docker push $DOCKER_USERNAME/frontend:latest
+          docker build -t $DOCKER_USERNAME/blog-frontend:latest .
+          docker push $DOCKER_USERNAME/blog-frontend:latest
