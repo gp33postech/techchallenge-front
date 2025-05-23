@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: node:18
+    runs-on: ubuntu-latest
 
     env:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
