@@ -19,7 +19,7 @@ function Login() {
       { id: 3, email: "gabriela@teste.com", password: 123456 },
       { id: 4, email: "pedro@teste.com", password: 123456 }
     ];
-    
+    //Usuários 
     const usuarioEncontrado = usuarios.find((usuario) => usuario.email === email); 
     if (usuarioEncontrado !== undefined) {
       setNomeUsuario(email.substring(0, email.indexOf("@")));
